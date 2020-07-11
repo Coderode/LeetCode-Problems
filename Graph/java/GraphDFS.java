@@ -12,7 +12,7 @@ class GraphDFS
     private LinkedList<Integer> adj[];
 
     // Constructor
-    Graph(int v)
+    GraphDFS(int v)
     {
         V = v;
         adj = new LinkedList[v];
@@ -56,7 +56,7 @@ class GraphDFS
 
     public static void main(String args[])
     {
-        Graph g = new Graph(4);
+        GraphDFS g = new GraphDFS(4);
 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
