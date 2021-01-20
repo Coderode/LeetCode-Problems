@@ -74,19 +74,22 @@ class QuadTree {
 		if (tree == null)
 			return;
 
-		System.out.printf("\nLevel = %d [X1=%d Y1=%d] \t[X2=%d Y2=%d] ",
+		
+		
+		if(tree.upperLeft == null) {
+			System.out.printf("\nBoundary = %d [X1=%d Y1=%d] \t[X2=%d Y2=%d] ",
 				tree.level, tree.boundry.getxMin(), tree.boundry.getyMin(),
 				tree.boundry.getxMax(), tree.boundry.getyMax());
 				
-		System.out.println("\nCamps center position :");
-		for (Point Point : tree.points) {
-			System.out.printf(" \n\t  x=%d y=%d", Point.x, Point.y);
+			System.out.println("\nCamps center position :");
+			for (Point Point : tree.points) {
+				System.out.printf("Striking point= \n\t  x=%d y=%d", Point.x, Point.y);
+			}
+			System.out.println("\nStriking point: ");
+			System.out.println(tree.boundry.getCenterX()+","+tree.boundry.getCenterY());
+			System.out.println("NO of camps destroyed : "+tree.points.size());
+			return;
 		}
-		System.out.println("\nStriking point: ");
-		System.out.println(tree.boundry.getCenterX()+","+tree.boundry.getCenterY());
-		System.out.println("NO of camps destroyed : "+tree.points.size());
-		
-		if(tree.upperLeft == null) return;
 		
 		int d1=tree.upperLeft.points.size();
 		int d2=tree.upperRight.points.size();
