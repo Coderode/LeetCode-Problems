@@ -3,13 +3,11 @@ import java.util.*;
 //User class
 class User{
 	private String name;
-	private String role;  //role of the user e.g. admin or normal user
-	private ArrayList<Brick> sent;
-	private ArrayList<Brick> received;
+	protected ArrayList<Brick> sent;
+	protected ArrayList<Brick> received;
 	//constructor
-	public User(String name,String role){
+	public User(String name){
 		this.name = name;
-		this.role = role;
 		sent = new ArrayList<Brick>();
 		received = new ArrayList<Brick>();
 	}
@@ -17,10 +15,6 @@ class User{
 	//other members
 	public String getName(){
 		return this.name;
-	}
-	
-	public String getRole(){
-		return role;
 	}
 	
 	public int getTotalAttentions(){
@@ -58,6 +52,16 @@ class User{
 	}
 	
 }
+
+//admin class
+class Admin extends User{
+	public Admin(String name){
+		super(name);
+		super.sent = new ArrayList<Brick>();
+		super.received = new ArrayList<Brick>();
+	}
+}
+
 //brick class
 class Brick{
 	private static int noOfBricks = 0;
@@ -249,15 +253,14 @@ public class Portal{
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<City> cities = null;
 		ArrayList<Brick> bricks = null;
-		ArrayList<Wall> walls = null;
+		ArrayList<Wall> walls = null; 
 		
 		//adding a admin for the system
-		users.add(new User("master","admin"));
+		Admin admin = new Admin("master");
 		
 		//adding users passed as argument in users 
 		for(int i=0; i<args.length; i++){
-			users.add(new User(args[i],"user"));
-			
+			users.add(new User(args[i]));
 		}
 		
 		//Just considering for one country with two cities
@@ -281,21 +284,12 @@ public class Portal{
 			//***************************for admin**************************
 			if(opt == 1){
 				//checking for admin validity
-				System.out.println("Enter username : ");
+				System.out.println("Enter admin username : ");
 				sc.nextLine();
 				String username = sc.nextLine();
-				User user = null;
-				boolean isValidUser = false;
 				
-				for(User p:users){
-					if(p.getName().equals(username) && p.getRole().equals("admin")){
-						isValidUser = true;
-						user = p;
-						break;
-					}		
-				}
 				//if valid admin user
-				if(isValidUser){
+				if(username.equals(admin.getName())){
 					boolean flag = true;
 					while(flag){
 						//just taking only one options for admin
@@ -352,7 +346,7 @@ public class Portal{
 				User user = null;
 				boolean isValidUser = false;
 				for(User p:users){
-					if(p.getName().equals(username) && p.getRole().equals("user")){
+					if(p.getName().equals(username)){
 						isValidUser = true;
 						user = p;
 						break;
