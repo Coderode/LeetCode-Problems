@@ -77,13 +77,13 @@ class QuadTree {
 		
 		
 		if(tree.upperLeft == null) {
-			System.out.printf("\nBoundary = %d [X1=%d Y1=%d] \t[X2=%d Y2=%d] ",
-				tree.level, tree.boundry.getxMin(), tree.boundry.getyMin(),
+			System.out.printf("\nTargetted Boundary =  [X1=%d Y1=%d] \t[X2=%d Y2=%d] ",
+				 tree.boundry.getxMin(), tree.boundry.getyMin(),
 				tree.boundry.getxMax(), tree.boundry.getyMax());
 				
-			System.out.println("\nCamps center position :");
+			System.out.println("\nTargetted Camps center positions :");
 			for (Point Point : tree.points) {
-				System.out.printf("Striking point= \n\t  x=%d y=%d", Point.x, Point.y);
+				System.out.printf("\n\t  x=%d y=%d", Point.x, Point.y);
 			}
 			System.out.println("\nStriking point: ");
 			System.out.println(tree.boundry.getCenterX()+","+tree.boundry.getCenterY());
