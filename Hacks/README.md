@@ -2,4 +2,4 @@
 
 ## Output
 
-![output](https://github.com/Coderode/Problem-Solving/tree/master/Hacks/output.JPG)
+![output](https://github.com/Coderode/Problem-Solving/blob/master/Hacks/output.JPG)
