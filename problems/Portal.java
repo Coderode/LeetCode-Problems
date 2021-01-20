@@ -1,13 +1,13 @@
 import java.util.*;
 
-//Person class
-class Person{
+//User class
+class User{
 	private String name;
 	private String role;  //role of the user e.g. admin or normal user
 	private ArrayList<Brick> sent;
 	private ArrayList<Brick> received;
 	//constructor
-	public Person(String name,String role){
+	public User(String name,String role){
 		this.name = name;
 		this.role = role;
 		sent = new ArrayList<Brick>();
@@ -61,15 +61,15 @@ class Person{
 //brick class
 class Brick{
 	private static int noOfBricks = 0;
-	private Person owner;
-	private Person dedicatedTo;
+	private User owner;
+	private User dedicatedTo;
 	private int flagg=0;
 	private boolean visibility;
 	private String message;
 	private ArrayList<String> comments;
 	
 	//constructor
-	Brick(Person owner,String message,Person dedicatedTo){
+	Brick(User owner,String message,User dedicatedTo){
 		this.owner = owner;
 		this.dedicatedTo = dedicatedTo;
 		this.noOfBricks++;
@@ -245,18 +245,18 @@ class Country{
 public class Portal{
 	public static void main(String args[]){
 		Scanner sc = new Scanner(System.in);
-		ArrayList<Person> users = new ArrayList<Person>();
+		ArrayList<User> users = new ArrayList<User>();
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<City> cities = null;
 		ArrayList<Brick> bricks = null;
 		ArrayList<Wall> walls = null;
 		
 		//adding a admin for the system
-		users.add(new Person("master","admin"));
+		users.add(new User("master","admin"));
 		
 		//adding users passed as argument in users 
 		for(int i=0; i<args.length; i++){
-			users.add(new Person(args[i],"user"));
+			users.add(new User(args[i],"user"));
 			
 		}
 		
@@ -284,10 +284,10 @@ public class Portal{
 				System.out.println("Enter username : ");
 				sc.nextLine();
 				String username = sc.nextLine();
-				Person user = null;
+				User user = null;
 				boolean isValidUser = false;
 				
-				for(Person p:users){
+				for(User p:users){
 					if(p.getName().equals(username) && p.getRole().equals("admin")){
 						isValidUser = true;
 						user = p;
@@ -349,9 +349,9 @@ public class Portal{
 				System.out.println("Enter username : ");
 				sc.nextLine();
 				String username = sc.nextLine();
-				Person user = null;
+				User user = null;
 				boolean isValidUser = false;
-				for(Person p:users){
+				for(User p:users){
 					if(p.getName().equals(username) && p.getRole().equals("user")){
 						isValidUser = true;
 						user = p;
@@ -365,7 +365,7 @@ public class Portal{
 					while(flag){
 						System.out.println("--------------Welcome to the app-----------");
 						System.out.println("1.Dedicate a brick");
-						System.out.println("2.Find Hottest Person");
+						System.out.println("2.Find Hottest User");
 						System.out.println("3.Find who did not get any Attention");
 						System.out.println("4.Edit your bricks if exist");
 						System.out.println("5.Watch out a brick");
@@ -394,8 +394,8 @@ public class Portal{
 										String msg = sc.nextLine();
 										System.out.println("Dedicated to  : ");
 										String name = sc.nextLine();  //assuming the user exist here 
-										Person dedicatedTo = null;
-										for(Person p:users){
+										User dedicatedTo = null;
+										for(User p:users){
 											if(p.getName().equals(name)){
 												dedicatedTo = p;
 												break;
@@ -409,7 +409,7 @@ public class Portal{
 								}
 								break;
 							case 2:
-								Person max = users.get(0);
+								User max = users.get(0);
 								for(int i=1; i<users.size(); i++){
 									if(max.getTotalAttentions() < users.get(i).getTotalAttentions()){
 										max = users.get(i);
