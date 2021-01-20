@@ -77,7 +77,8 @@ class QuadTree {
 		System.out.printf("\nLevel = %d [X1=%d Y1=%d] \t[X2=%d Y2=%d] ",
 				tree.level, tree.boundry.getxMin(), tree.boundry.getyMin(),
 				tree.boundry.getxMax(), tree.boundry.getyMax());
-
+				
+		System.out.println("\nCamps center position :");
 		for (Point Point : tree.points) {
 			System.out.printf(" \n\t  x=%d y=%d", Point.x, Point.y);
 		}
@@ -159,6 +160,7 @@ class StrikeCamps{
 		points.add(new Point(5,5,1));
 		points.add(new Point(5,6,1));
 		points.add(new Point(50,70,1));
+		points.add(new Point(52,71,1));
 		points.add(new Point(6,5,1));
 		points.add(new Point(7,5,1));
 		points.add(new Point(5,7,1));
