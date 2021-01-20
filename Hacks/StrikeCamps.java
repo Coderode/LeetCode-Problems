@@ -56,7 +56,7 @@ class Boundry {
 
 class QuadTree {
 	int level = 0;
-	ArrayList<Point> points;
+	ArrayList<Point> points=null;
 	QuadTree upperLeft = null;
 	QuadTree upperRight = null;
 	QuadTree lowerLeft = null;
@@ -84,6 +84,8 @@ class QuadTree {
 		System.out.println("\nStriking point: ");
 		System.out.println(tree.boundry.getCenterX()+","+tree.boundry.getCenterY());
 		System.out.println("NO of camps destroyed : "+tree.points.size());
+		
+		if(tree.upperLeft == null) return;
 		
 		int d1=tree.upperLeft.points.size();
 		int d2=tree.upperRight.points.size();
