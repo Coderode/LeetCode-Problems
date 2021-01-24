@@ -15,7 +15,7 @@ interface WithdrawChain{
 	//for setting the next of chain
 	void setNextChain(WithdrawChain nextChain);
 	//method for processing of withdrawal amount 
-	void withdraw(Amount amt);
+	void withdraw(Amount amt,HashMap<Integer,Integer> notes,HashMap<Integer,Integer> counter);
 }
 
 //class for withdrawal of Rs.2000 notes
@@ -28,7 +28,7 @@ class Withdraw2000 implements WithdrawChain{
 	}
 	//processing for 2000 
 	@Override
-	public void withdraw(Amount amt,HashMap<Intger,Integer> notes,HashMap<Integer,Integer> counter){
+	public void withdraw(Amount amt,HashMap<Integer,Integer> notes,HashMap<Integer,Integer> counter){
 		if(amt.getAmount() >= 2000){
 			
 			int n = amt.getAmount()/2000;
@@ -40,7 +40,7 @@ class Withdraw2000 implements WithdrawChain{
 				
 				
 			}else{
-				counter.put(notes.get(2000));
+				counter.put(notes.get(2000),notes.get(2000));
 				remainder = amt.getAmount() - notes.get(2000)*2000;
 			}
 		
@@ -64,7 +64,7 @@ class Withdraw500 implements WithdrawChain{
 	}
 	
 	@Override
-	public void withdraw(Amount amt,HashMap<Intger,Integer> notes,HashMap<Integer,Integer> counter){
+	public void withdraw(Amount amt,HashMap<Integer,Integer> notes,HashMap<Integer,Integer> counter){
 		if(amt.getAmount() >= 500){
 			
 			int n = amt.getAmount()/500;
@@ -100,7 +100,7 @@ class Withdraw200 implements WithdrawChain{
 	}
 	
 	@Override
-	public void withdraw(Amount amt,HashMap<Intger,Integer> notes,HashMap<Intger,Integer> counter){
+	public void withdraw(Amount amt,HashMap<Integer,Integer> notes,HashMap<Integer,Integer> counter){
 		if(amt.getAmount() >= 200){
 			
 			int n = amt.getAmount()/200;
@@ -136,7 +136,7 @@ class Withdraw100 implements WithdrawChain{
 	}
 	
 	@Override
-	public void withdraw(Amount amt,HashMap<Intger,Integer> notes,HashMap<Intger,Integer> counter){
+	public void withdraw(Amount amt,HashMap<Integer,Integer> notes,HashMap<Integer,Integer> counter){
 		
 			
 		int n = amt.getAmount()/100;
@@ -157,7 +157,18 @@ class Withdraw100 implements WithdrawChain{
 		}else{
 			//withdrawing
 			if(counter.get(2000)>0)
-			System.out.println("Dispensing "+notes.get(2000)+" notes of 2000");
+				System.out.println("Dispensing "+notes.get(2000)+" notes of 2000");
+			if(counter.get(500)>0)
+				System.out.println("Dispensing "+notes.get(500)+" notes of 500");
+			if(counter.get(200)>0)
+				System.out.println("Dispensing "+notes.get(200)+" notes of 200");
+			if(counter.get(100)>0)
+				System.out.println("Dispensing "+notes.get(100)+" notes of 100");
+			
+			notes.put(2000,notes.get(2000)-counter.get(2000));
+			notes.put(500,notes.get(500)-counter.get(500));
+			notes.put(200,notes.get(200)-counter.get(200));
+			notes.put(100,notes.get(100)-counter.get(100));
 			
 		}
 			
@@ -234,6 +245,11 @@ class ATM{
 	//main method for processing of the atm functionalities
 	public static void main(String args[]){
 		Scanner sc = new Scanner(System.in);
+		HashMap<Integer,Integer> counter = new HashMap<>();
+		counter.put(2000,0);
+		counter.put(500,0);
+		counter.put(200,0);
+		counter.put(100,0);
 		ATM atm = new ATM();
 		//window
 		while(true){
@@ -256,7 +272,8 @@ class ATM{
 							System.out.println("Amount should be in multiple of 100");
 							
 						}else{
-							atm.chain1.withdraw(new Amount(withAmount));
+							atm.chain1.withdraw(new Amount(withAmount),atm.getNotes(),counter);
+							System.out.println("Total amount = "+atm.getTotalAmount());
 						}
 					}
 					
