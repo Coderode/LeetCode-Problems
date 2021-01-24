@@ -1,6 +1,6 @@
 # ATM PROBLEM
 
-'''
+```
 You have to create a program for ATM Which would have certain defined denominations of notes : 100 ,200, 500, and 2000 INR.
 
 Now you have to design your ATM in such a way that at any time ATM can be top-up with any required domination like I can add 41000 as (2000 x 20) + (500 x 2) notes
@@ -20,7 +20,8 @@ Next step: it can be done by Modi Ji, that older denomination is not valid in ca
 Try to achieve OOPS , and SOLID principles as much as you can, 
 
 Also, we will add new use cases to see whether your system can adapt to those changes. If Not, then your design is bad. (SOLID,TRY,YAGNI,KISS)
-'''
+```
+
 ## Output
 
 
